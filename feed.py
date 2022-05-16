@@ -18,7 +18,7 @@ print("Logged in and awaiting subreddit stream.")
 
 def do_feed(post: Submission):
 
-    e = Embed(title=post.title, url=post.shortlink)
+    e = Embed(title=textwrap.shorten(post.title, width=256), url=post.shortlink)
     e.set_author(
         name=f"u/{post.author.name}",
         url=f"https://reddit.com/u/{post.author.name}",
