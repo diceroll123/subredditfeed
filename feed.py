@@ -29,7 +29,7 @@ def do_feed(post: Submission):
     # there are better and bigger images we could use,
     # but it requires a lot of checking and sanitizing, so this is fine
     thumbnail = post.thumbnail
-    if thumbnail != "self":
+    if thumbnail not in ["self", "nsfw", "default"]:
         e.set_thumbnail(url=thumbnail)
 
     if post.selftext:
