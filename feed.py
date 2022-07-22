@@ -13,6 +13,8 @@ r = praw.Reddit(os.getenv("BOT_USERNAME"), user_agent=os.getenv("USER_AGENT"))  
 
 webhook = SyncWebhook.from_url(os.getenv("WEBHOOK_URL"))  # type: ignore
 
+RESTRICTED_THUMBNAILS = ["self", "nsfw", "default", "spoiler"]
+
 print("Logged in and awaiting subreddit stream.")
 
 
@@ -29,7 +31,7 @@ def do_feed(post: Submission):
     # there are better and bigger images we could use,
     # but it requires a lot of checking and sanitizing, so this is fine
     thumbnail = post.thumbnail
-    if thumbnail not in ["self", "nsfw", "default"]:
+    if thumbnail not in RESTRICTED_THUMBNAILS:
         e.set_thumbnail(url=thumbnail)
 
     if post.selftext:
