@@ -1,0 +1,11 @@
+[project]
+name = "subredditfeed"
+version = "0.1.0"
+description = "A script to listen to a subreddit's incoming posts and send them to a Discord channel via webhook"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "python-dotenv",
+    "praw",
+    "discord-py",
+]

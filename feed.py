@@ -9,7 +9,10 @@ from praw.models import Submission
 
 load_dotenv()
 
-r = praw.Reddit(os.getenv("BOT_USERNAME"), user_agent=os.getenv("USER_AGENT"))  # type: ignore
+r = praw.Reddit(
+    os.environ["BOT_USERNAME"],
+    user_agent=os.environ["USER_AGENT"],
+)
 
 webhook = SyncWebhook.from_url(os.getenv("WEBHOOK_URL"))  # type: ignore
 
@@ -18,8 +21,7 @@ RESTRICTED_THUMBNAILS = ["self", "nsfw", "default", "spoiler"]
 print("Logged in and awaiting subreddit stream.")
 
 
-def do_feed(post: Submission):
-
+def do_feed(post: Submission) -> None:
     e = Embed(title=textwrap.shorten(post.title, width=256), url=post.shortlink)
     e.set_author(
         name=f"u/{post.author.name}",
@@ -40,7 +42,9 @@ def do_feed(post: Submission):
     webhook.send(embed=e)
 
 
-sub_stream: Generator[Submission, None, None] = r.subreddit(os.getenv("SUBREDDIT")).stream.submissions(skip_existing=True)  # type: ignore
+sub_stream: Generator[Submission, None, None] = r.subreddit(
+    os.environ["SUBREDDIT"]
+).stream.submissions(skip_existing=True)
 
 for post in sub_stream:
     do_feed(post)

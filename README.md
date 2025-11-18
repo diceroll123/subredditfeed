@@ -18,10 +18,14 @@ To run this project, you will need to add the following environment variables to
 
 ## Deployment
 
-To deploy this script after filling in the environment variables + `praw.ini`, just run
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management.
+
+To deploy this script after filling in the environment variables + `praw.ini`, just run:
 
 ```bash
-  pip install -r requirements.txt
-  python ./feed.py
-```
+# Install dependencies
+uv sync
 
+# Run the script
+uv run feed.py
+```
